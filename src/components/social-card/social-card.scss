@@ -1,0 +1,30 @@
+$default-color: #14171b;
+$bold-color: #657685;
+$link-color-blue: #1c95e1;
+$light-color: #e1e8ed;
+$medium-color: #9caab4;
+
+.social-card {
+  color: $default-color;
+  padding: 10px 20px;
+
+  &__container {
+    max-width: 500px;
+    margin: auto;
+  }
+
+  &__header {
+    .header--info {
+      color: $bold-color;
+      margin: 10px 0;
+      b {
+        color: $default-color;
+      }
+    }
+  }
+
+  &__footer {
+    padding: 10px 0;
+    display: flex;
+  }
+}

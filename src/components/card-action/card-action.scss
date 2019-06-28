@@ -1,0 +1,21 @@
+$red-color: #e1255e;
+$green-color: #28c46c;
+
+.socia-card--action {
+  margin-right: 20px;
+  cursor: pointer;
+
+  &.theme-red {
+
+    &.active {
+      color: $red-color;
+    }
+  }
+
+  &.theme-green {
+
+    &.active {
+      color: $green-color;
+    }
+  }
+}
