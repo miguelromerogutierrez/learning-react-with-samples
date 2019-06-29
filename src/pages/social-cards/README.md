@@ -58,7 +58,9 @@ class SocialCardsPage extends React.Component {
 ## Stateful component
 A stateful component is a component that will store a state, so you can use that state in order to change your view.
 ```javascript
-// A stateful component should be declared as a Class extended by React.Component or React.PureComponent. In react 16 we can add a state hook to functional components.
+// A stateful component should be declared as a Class extended
+// by React.Component or React.PureComponent. In react 16 we
+// can add a state hook to functional components.
 class SocialCardsPage extends React.Component {
 
   state = {
@@ -67,17 +69,23 @@ class SocialCardsPage extends React.Component {
 
   async componentDidMount() {
     const cardsData = await getCardsData();
-    // Here we change the state "cardsData" with setState in order to provoke a re-render in the view
+    // Here we change the state "cardsData" with setState in 
+    // order to provoke a re-render in the view
     this.setState({ cardsData });
   }
 
   render() {
-    // this ternary condition help us to show a spinner until we get the cards data
+    // this ternary condition help us to show a spinner
+    // until we get the cards data
     return this.state.cardsData.length === 0
       ? <Spinner />
       : ( <div className="stories--container">
             {this.state.cardsData.map(
-              (card) => <SocialCard {...getSocialCardProps(card)} onLike={this.hanldeClickLike} onRetweet={this.hanldeClickRetweet} />
+              (card) => <SocialCard 
+                          {...getSocialCardProps(card)}
+                          onLike={this.hanldeClickLike}
+                          onRetweet={this.hanldeClickRetweet}
+                        />
             )}
           </div>
         );
@@ -95,7 +103,11 @@ function CardAction(
   { icon, count, onClick, className, active, id } 
   ) {
   return (
-    <div className={`socia-card--action ${className} ${active ? 'active' : ''}`} onClick={(e) => onClick(e, id)}>
+    <div 
+      className={`socia-card--action ${className} 
+      ${active ? 'active' : ''}`}
+      onClick={(e) => onClick(e, id)}
+    >
       <span className="action__icon">{icon}</span>
       <span className="action__count">{count}</span>
     </div>
@@ -128,14 +140,24 @@ JSX is a syntax extension for javascript. This help us to develop components fas
 ```javascript
 class SocialCardsPage extends React.Component {
   
-  // In the return statement we can notice the use of ternary condition (? :) in order to display <Spinner /> or <Stories--container /> 
-  // JSX allow us use all the javascript power in order to create logic inside the template. That's why we can use conditional operator and loops.
+  // In the return statement we can notice the use of ternary 
+  // condition (? :) in order to display <Spinner /> or 
+  // <Stories--container /> 
+
+  // JSX allow us use all the javascript power in order 
+  // to create logic inside the template. That's why we can 
+  // use conditional operator and loops.
   render() {
     return this.state.cardsData.length === 0
       ? <Spinner />
       : ( <div className="stories--container">
             {this.state.cardsData.map(
-              (card) => <SocialCard {...getSocialCardProps(card)} onLike={this.hanldeClickLike} onRetweet={this.hanldeClickRetweet} />
+              (card) => 
+                <SocialCard
+                  {...getSocialCardProps(card)}
+                  onLike={this.hanldeClickLike}
+                  onRetweet={this.hanldeClickRetweet}
+                />
             )}
           </div>
         );
@@ -149,14 +171,20 @@ Because JSX allow us use javascript, we can create loops in order to create dyna
 ```javascript
 class SocialCardsPage extends React.Component {
   
-  // We ar mapping the cardsData array into new array of SocialCard components
+  // We ar mapping the cardsData array into 
+  // new array of SocialCard components.
   // [ CardDataObj{} ] => [<SocialCard />]
   render() {
     return this.state.cardsData.length === 0
       ? <Spinner />
       : ( <div className="stories--container">
             {this.state.cardsData.map(
-              (card) => <SocialCard {...getSocialCardProps(card)} onLike={this.hanldeClickLike} onRetweet={this.hanldeClickRetweet} />
+              (card) => 
+                <SocialCard
+                  {...getSocialCardProps(card)}
+                  onLike={this.hanldeClickLike}
+                  onRetweet={this.hanldeClickRetweet}
+                />
             )}
           </div>
         );
@@ -175,14 +203,26 @@ class SocialCardsPage extends React.Component {
   hanldeClickRetweet = (event, id) => { /* ... */ }
   
   // We can notice some very useful uses for dynamic props.
-  // One is the use of handler events, we can declare handlers out of our jsx and then just pass the function as a variable inside the brackets
-  // The next one is a feature in es6 called `destructuring`, so we use this feature using a function that retrieve us the object with all the props that our SocialCard component use and then destructuring this object.
+
+  // One is the use of handler events, we can declare 
+  // handlers out of our jsx and then just pass the 
+  // function as a variable inside the brackets.
+
+  // The next one is a feature in es6 called `destructuring`,
+  // so we use this feature using a function that retrieve 
+  // us the object with all the props that our SocialCard 
+  // component use and then destructuring this object.
   render() {
     return this.state.cardsData.length === 0
       ? <Spinner />
       : ( <div className="stories--container">
             {this.state.cardsData.map(
-              (card) => <SocialCard {...getSocialCardProps(card)} onLike={this.hanldeClickLike} onRetweet={this.hanldeClickRetweet} />
+              (card) => 
+                <SocialCard 
+                  {...getSocialCardProps(card)}
+                  onLike={this.hanldeClickLike}
+                  onRetweet={this.hanldeClickRetweet} 
+                />
             )}
           </div>
         );
@@ -202,7 +242,12 @@ class SocialCardsPage extends React.Component {
       ? <Spinner />
       : ( <div className="stories--container">
             {this.state.cardsData.map(
-              (card) => <SocialCard {...getSocialCardProps(card)} onLike={this.hanldeClickLike} onRetweet={this.hanldeClickRetweet} />
+              (card) => 
+                <SocialCard
+                  {...getSocialCardProps(card)}
+                  onLike={this.hanldeClickLike}
+                  onRetweet={this.hanldeClickRetweet}
+                />
             )}
           </div>
         );
