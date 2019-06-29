@@ -19,7 +19,7 @@ CardAction.propTypes = {
   className: PropTypes.string,
 };
 
-CardAction.defaultValues = {
+CardAction.defaultProps = {
   onClick: () => {},
   className: ''
 };
