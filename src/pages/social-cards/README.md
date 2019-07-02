@@ -1,7 +1,7 @@
 # Table of contents
 
 - [Social Cards](#social-cards)
-  - [What we can learn?](#what-we-can-learn-?)
+  - [What we can learn](#what-we-can-learn)
   - [Life-cycle component](#life-cycle-component)
   - [Stateful component](#stateful-component)
   - [Functional components](#functional-components)
@@ -13,9 +13,10 @@
 
 # Social cards
 
-You can find this kind of components everywhere (blogs, twitter, pinterest, etc). This are useful to share information from social web sites like facebook or twitter.
+You can find this kind of components everywhere (blogs, twitter, pinterest, etc). This type of components are widely used along the web. They are specially useful when it comes to share information on social websites like Facebook, Twitter, Pinterest, blogs, etc.
 
-### What we can learn?
+
+### What we can learn
 
 This is a simple component, but we can find:
   - life cycle of a component
@@ -40,9 +41,9 @@ class SocialCardsPage extends React.Component {
 
   render() {
     // We can notice in the first render, cardsData is empty
-    // thats why <Spinner /> is render at first time,
-    // then componentDidMount lifecycle method is executed
-    // retriving the cardsData and changing the state to provoke a re-render with the new state.
+    // thats why <Spinner /> is rendered first,
+    // then the componentDidMount lifecycle method is executed
+    // retrieving the cardsData and changing the state to provoke a re-render with the new state.
     return this.state.cardsData.length === 0
       ? <Spinner />
       : ( <div className="stories--container">
@@ -64,7 +65,7 @@ A stateful component is a component that will store a state, so you can use that
 class SocialCardsPage extends React.Component {
 
   state = {
-    cardsData: [] // cardsData state initilialized as an empty array
+    cardsData: [] // cardsData state initialized as an empty array
   };
 
   async componentDidMount() {
@@ -75,7 +76,7 @@ class SocialCardsPage extends React.Component {
   }
 
   render() {
-    // this ternary condition help us to show a spinner
+    // this ternary condition helps us to show a spinner
     // until we get the cards data
     return this.state.cardsData.length === 0
       ? <Spinner />
@@ -93,10 +94,10 @@ class SocialCardsPage extends React.Component {
 }
 ```
 ## Functional components
-A functional component is a more simple component that doesn't have state and a complex lifecycle neither. This is useful just to render a small pices of reusable components.
+A functional component is a much simpler component that doesn't have state nor a complex lifecycle either. This comes very handy when rendering small and reusable components.
 
 ```javascript
-// A functional component is a javascript function that recieves as paramenters its props.
+// A functional component is a javascript function that receives as parameters its own props.
 // And returns the jsx to render.
 function CardAction(
   /* props */
@@ -116,13 +117,13 @@ function CardAction(
 ```
 
 ## Side Effects inside components
-There are a lot of solutions to handle side effects but all depends in how you are handling the state of your app. In this case we are handling our state directly inside the component that's why we are using componentDidMount to handle our side effect (also we could use componentDidUpdate, but CDM is executed just once after the component has been render the first time, thats why is better than CDU).
+There are a lot of solutions to handle side effects but all depends on how you are handling the state of your app. In this case we are handling our state directly inside of the component and that's why we are using componentDidMount to handle our side effect (also we could use componentDidUpdate, but CDM is executed just once after the component has been rendered the first time, that's why it is better than CDU).
 ```javascript
 class SocialCardsPage extends React.Component {
 
   async componentDidMount() {
-    // After the first render CDM will be executed
-    // handling the request to then change the state of the component.
+    // After the first render the CDM will be executed
+    // and it will handle the request to then change the state of the component later.
     const cardsData = await getCardsData();
     this.setState({ cardsData });
   }
@@ -135,7 +136,7 @@ class SocialCardsPage extends React.Component {
 ```
 
 ## Ternary conditions inside JSX
-JSX is a syntax extension for javascript. This help us to develop components faster and have clear what we are trying to render. [more info](https://reactjs.org/docs/introducing-jsx.html)
+JSX is a syntax extension for JavaScript. This allows us to develop components faster and to express better and cleaner what we are trying to render. [more info](https://reactjs.org/docs/introducing-jsx.html)
 
 ```javascript
 class SocialCardsPage extends React.Component {
@@ -166,12 +167,12 @@ class SocialCardsPage extends React.Component {
 ```
 
 ## Loops inside JSX
-Because JSX allow us use javascript, we can create loops in order to create dynamically components.
+Thanks to JSX we can use JavaScript to write loops in order to create dynamically components.
 
 ```javascript
 class SocialCardsPage extends React.Component {
   
-  // We ar mapping the cardsData array into 
+  // We are mapping the cardsData array into 
   // new array of SocialCard components.
   // [ CardDataObj{} ] => [<SocialCard />]
   render() {
@@ -193,7 +194,7 @@ class SocialCardsPage extends React.Component {
 ```
 
 ## Dynamic properties
-JSX allow us set any javascript sentence inside brackets `{}` so we can set variable values as a propery
+Another use of JSX is the capablity to code JavaScript sentences inside brackets `{}` so we can set variable values as a propery
 
 ```javascript
 class SocialCardsPage extends React.Component {
@@ -209,9 +210,9 @@ class SocialCardsPage extends React.Component {
   // function as a variable inside the brackets.
 
   // The next one is a feature in es6 called `destructuring`,
-  // so we use this feature using a function that retrieve 
+  // this feature may be implemented by using a function that retrieves
   // us the object with all the props that our SocialCard 
-  // component use and then destructuring this object.
+  // component uses and then destructuring this object.
   render() {
     return this.state.cardsData.length === 0
       ? <Spinner />
@@ -232,7 +233,7 @@ class SocialCardsPage extends React.Component {
 
 ## Prop getters pattern
 
-Prop getters is a pattern to split in a separete function the logic to retrieve the properties of a component.
+Prop getters is a pattern to split in a separate function the logic to retrieve the properties of a component.
 
 ```javascript
 class SocialCardsPage extends React.Component {
