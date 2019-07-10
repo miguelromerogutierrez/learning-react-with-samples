@@ -1,0 +1,43 @@
+.register-page {
+  margin: 80px auto;
+  padding: 20px 50px;
+  width: fit-content;
+  background: white;
+  height: fit-content;
+  border-radius: 10px;
+
+  h1 {
+    color: #263859;
+    font-size: 18px;
+    font-weight: 600;
+
+    &.success {
+      color: #82c91e;
+    }
+  }
+
+  .field {
+    margin: 5px 0;
+    &-label {
+      display: block;
+      color: #263859;
+      font-size: 0.8em;
+      margin-bottom: 5px;
+    }
+
+    .radiobutton-field {
+      margin: 5px 0;
+    }
+  }
+  
+  .form-button {
+    text-align: center;
+    margin-top: 20px;
+  }
+
+  .field-error {
+    font-size: 0.8em;
+    margin: 0;
+    color: #f34040;
+  }
+}
