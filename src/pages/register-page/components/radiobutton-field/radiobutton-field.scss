@@ -1,0 +1,36 @@
+.radiobutton-field {
+  position: relative;
+  padding-left: 20px;
+
+  &.active {
+    &:after {
+      content: " ";
+      position: absolute;
+      top: 3px;
+      left: 3px;
+      width: 9px;
+      height: 9px;
+      border-radius: 100%;
+      background: #6b778d;
+    }
+  }
+
+  &:before {
+    content: " ";
+    top: 0;
+    left: 0;
+    position: absolute;
+    width: 13px;
+    height: 13px;
+    border-radius: 100%;
+    border: 1px solid #6b778d;
+  }
+
+  &__input {
+    display: none;
+  }
+
+  &__label {
+    color: #263859;
+  }
+}

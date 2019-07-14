@@ -1,0 +1,26 @@
+.form-field {
+
+  &__label {
+    color: #263859;
+    font-size: 0.8em;
+  }
+  &__input {
+    display: block;
+    color: #263859;
+    font-size: 1em;
+    padding: 10px 5px;
+    border-radius: 3px;
+    border: 1px solid #6b778d;
+    margin: 10px 0;
+
+  }
+  &.error &__input {
+    border-color: #f34040;
+  }
+
+  &__error {
+    font-size: 0.8em;
+    margin: 0;
+    color: #f34040;
+  }
+}
