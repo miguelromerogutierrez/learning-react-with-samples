@@ -9,6 +9,7 @@ export default function header() {
       <ul>
         <li><Link to="/social-cards">Social Cards</Link></li>
         <li><Link to="/register-form">Register Form</Link></li>
+        <li><Link to="/hacker-news">Hacker News</Link></li>
       </ul>
     </div>
   )
