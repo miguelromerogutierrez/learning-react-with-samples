@@ -5,7 +5,7 @@ import './spinner.scss';
 function Spinner(props) {
   return (
     <div className="spinner spinner--container">
-      <i class="fas fa-spinner" />
+      <i className="fas fa-spinner" />
     </div>
   )
 }
