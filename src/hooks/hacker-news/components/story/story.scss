@@ -1,0 +1,43 @@
+.story {
+
+  &--container {
+    width: 700px;
+    margin: auto;
+  }
+
+  &--card {
+    color: #fff;
+    padding: 10px 15px;
+    padding-left: 40px;
+    position: relative;
+  }
+
+  &--title {
+    color: #fbe2e2;
+    text-decoration: none;
+
+    &:hover {
+      color: #f98080;
+    }
+  }
+
+  &-footer {
+    display: flex;
+    font-size: 0.8em;
+
+    &__author {
+      color: #6b778d;
+    }
+
+    &__comments {
+      cursor: pointer;
+    }
+  }
+
+  &--score {
+    position: absolute;
+    top: 10px;
+    left: 5px;
+    color: #ff6768;
+  }
+}

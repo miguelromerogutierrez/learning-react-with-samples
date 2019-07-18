@@ -1,17 +1,16 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { Switch, Route } from "react-router-dom";
 
-function App(props) {
+import HackerNewsPage from './hacker-news/hacker-news-page';
+
+import '../App.css';
+
+function App() {
   return (
-    <div>
-      
-    </div>
-  )
-}
-
-App.propTypes = {
-
+    <Switch>
+      <Route path="/hooks" exact component={HackerNewsPage} />
+    </Switch>
+  );
 }
 
 export default App;
-

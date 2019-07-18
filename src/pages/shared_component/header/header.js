@@ -10,6 +10,7 @@ export default function header() {
         <li><Link to="/social-cards">Social Cards</Link></li>
         <li><Link to="/register-form">Register Form</Link></li>
         <li><Link to="/hacker-news">Hacker News</Link></li>
+        <li><Link to="/hooks">Hooks</Link></li>
       </ul>
     </div>
   )
