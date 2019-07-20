@@ -2,14 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import Stories from './components/story/stories';
-import useStoriesApi from './components/stories-api/useStoriesApi';
-import Spinner from '../../pages/shared_component/spinner/spinner';
+import { useHNContext } from './components/stories-api/HNContext';
 
 export default function HackerNewsPage() {
 
   const [kind, setKind] = React.useState('newstories');
 
-  const { pending, storiesIds, retrieveStoriesIds } = useStoriesApi();
+  const { retrieveStoriesIds } = useHNContext();
 
   const handleStoriesSelection = (event) => {
     setKind(event.target.value);
@@ -19,7 +18,6 @@ export default function HackerNewsPage() {
     retrieveStoriesIds(kind);
   }, [kind]);
 
-  if (storiesIds.length === 0 || pending) return <Spinner />;
   return (
     <div className="hacker-news-page">
       <div className="page-header">
@@ -30,7 +28,7 @@ export default function HackerNewsPage() {
         <button value="showstories" onClick={handleStoriesSelection} >Show Stories</button>
         <button value="jobstories" onClick={handleStoriesSelection} >Job Stories</button>
       </div>
-      <Stories storiesIds={storiesIds} loader={<Spinner />} />
+      <Stories />
     </div>
   );
 }

@@ -7,12 +7,13 @@ const HNContext = React.createContext({});
 const composeReducers = (reducers) => {
   const reducersKeys = Object.keys(reducers);
   return (...args) => {
-    return reducersKeys.reduce((state, keyReducer) => {
+    const nextState = reducersKeys.reduce((state, keyReducer) => {
       return {
         ...state,
         [keyReducer]: reducers[keyReducer](state[keyReducer], args[1])
       };
-    }, args[0])
+    }, args[0]);
+    return nextState;
   }
 }
 
@@ -51,33 +52,31 @@ const HNcommentsReducer = (state, {type, payload}) => {
   }
 }
 
-const reducerIdentity = CHECK_TYPE => (state, { type }) => {
+const reducerThruthly = CHECK_TYPE => (state, { type }) => {
   if (Array.isArray(CHECK_TYPE)) {
-    return CHECK_TYPE.includes(type) ? true : state;
+    return CHECK_TYPE.includes(type);
   }
-  return type === CHECK_TYPE ? true : state;
+  return type === CHECK_TYPE;
 };
 
 const HNReducers = composeReducers({
-  storiesids: HNstoriesIdReducer,
+  storiesIds: HNstoriesIdReducer,
   stories: composeReducers({
-    pending: reducerIdentity([
-      'GET_STORIES', 'SUCCESS_GET_STORIES', 'ERROR_GET_STORIES',
-      'GET_COMMENTS', 'SUCCESS_GET_COMMENTS', 'ERROR_GET_COMMENTS',
-    ]),
-    success: reducerIdentity('SUCCESS_GET_STORIES'),
-    error: reducerIdentity('ERROR_GET_STORIES'),
+    pending: reducerThruthly('GET_STORIES'),
+    success: reducerThruthly('SUCCESS_GET_STORIES'),
+    error: reducerThruthly('ERROR_GET_STORIES'),
     asArray: HNstoriesReducer,
     storiesComments: HNcommentsReducer
   }),
 });
 
-export const HNProvider = () => {
+export const HNProvider = (props) => {
   const [state, dispatch] = React.useReducer(HNReducers, {
     storiesIds: {
       pending: false,
       success: false,
-      error: false
+      error: false,
+      payload: []
     },
     stories: {
       pending: false,
@@ -122,12 +121,15 @@ export const HNProvider = () => {
     }
   };
 
-  return <HNContext.Provider value={{
-    ...state,
-    retrieveStoriesIds,
-    retrieveStories,
-    retrieveComments
-  }}/>
+  return <HNContext.Provider
+    value={{
+      ...state,
+      retrieveStoriesIds,
+      retrieveStories,
+      retrieveComments
+    }}
+    {...props}
+  />;
 }
 
 export const useHNContext = () => {

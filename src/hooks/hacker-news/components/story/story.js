@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import Comments from '../comment/comment';
 import format from 'date-fns/format';
 
@@ -25,11 +24,7 @@ function Story(props) {
         )}
         <span className="story-footer__date">{format(new Date(props.time*1000), 'MM/DD/YYYY')}</span>
       </div>
-      {
-        displayComments
-        ? <Comments comments={props.kids || []} loader={props.loader} />
-        : null
-      }
+      <Comments show={displayComments} comments={props.kids || []} parentId={props.id} />
       <div className="story--score">{props.score}</div>
     </div>
   );

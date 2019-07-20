@@ -1,26 +1,32 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
+import React from 'react'
+import shallowequal from 'shallowequal';
 import usePaginator from '../usePaginator';
-import useDeepCompareDependencies from '../useDeepCompareDependencies';
-import useStoriesApi from '../stories-api/useStoriesApi';
+import { useHNContext } from '../stories-api/HNContext';
 
 import './comment.scss';
-
-export default function Comment({ comments, loader }) {
-  const { itemsPage } = usePaginator({ data: comments, itemsPerPage: 7 });
-
-  const { pending, stories, retrieveStories } = useStoriesApi();
-
+const emptyArr = [];
+export default function Comment({ comments, parentId, show }) {
+  const { itemsPage, nextPage, prevPage } = usePaginator({ data: show ? comments : emptyArr, itemsPerPage: 7 });
+  const { stories, retrieveComments } = useHNContext();
+  const itemsPageRef = React.useRef(itemsPage);
   React.useEffect(() => {
-    retrieveStories(itemsPage)
-  }, [itemsPage]);
+    if (show && !shallowequal(itemsPageRef.current, itemsPage)) {
+      itemsPageRef.current = itemsPage;
+      retrieveComments(itemsPage, parentId)
+    }
+  });
 
-  if (itemsPage.length === 0) return null;
-  if (pending) return loader;
+  if (!stories.storiesComments[parentId] || !show ) return null;
   return (
     <div className="story-comments">
+      <div>
+        <button onClick={prevPage}> &lt; </button>
+        <button onClick={nextPage}> &gt; </button>
+      </div>
       {
-        stories.map(comment =>(
+        stories.storiesComments[parentId]
+          .filter(comment => comment !== null)
+          .map(comment =>(
           <div className="comment">
             <i class="fas fa-chevron-circle-right"></i>
             <div dangerouslySetInnerHTML={{__html: comment.text}} />

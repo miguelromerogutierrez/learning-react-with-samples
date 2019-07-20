@@ -1,25 +1,32 @@
 import React from 'react'
-import PropTypes from 'prop-types'
+import shallowequal from 'shallowequal';
 import usePaginator from '../usePaginator';
-import useDeepCompareDependencies from '../useDeepCompareDependencies';
-import useStoriesApi from '../stories-api/useStoriesApi';
+import { useHNContext } from '../stories-api/HNContext';
 import Story from '../story/story';
+import Spinner from '../../../../pages/shared_component/spinner/spinner';
 
-function Stories({ storiesIds, loader }) {
-  const { itemsPage } = usePaginator({ data: storiesIds, itemsPerPage: 15 });
-  const { pending, stories, retrieveStories } = useStoriesApi();
+function Stories() {
+  const { stories, storiesIds, retrieveStories } = useHNContext();
+  const { itemsPage, nextPage, prevPage } = usePaginator({ data: storiesIds.payload, itemsPerPage: 15 });
+  const itemsPageRef = React.useRef(itemsPage);
 
   React.useEffect(() => {
-    retrieveStories(itemsPage);
-  }, [itemsPage]);
+    if (!shallowequal(itemsPageRef.current, itemsPage)) {
+      itemsPageRef.current = itemsPage;
+      retrieveStories(itemsPage);
+    }
+  });
 
-  if (itemsPage.length === 0) return null;
-  if (pending) return loader;
+  if (itemsPage.length === 0 || stories.pending) return <Spinner />;
   return (
     <div className="story--container">
+      <div>
+        <button onClick={prevPage}> &lt; </button>
+        <button onClick={nextPage}> &gt; </button>
+      </div>
       {
-        stories.map(
-          story => <Story {...story} loader={loader} />
+        stories.asArray.map(
+          story => <Story {...story} />
         )
       }
     </div>
