@@ -1,17 +1,16 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
-function App(props) {
+import { HNProvider } from './hacker-news/components/stories-api/HNContext'
+import HackerNewsPage from './hacker-news/hacker-news-page';
+
+import '../App.css';
+
+function App() {
   return (
-    <div>
-      
-    </div>
-  )
-}
-
-App.propTypes = {
-
+    <HNProvider>
+      <HackerNewsPage />
+    </HNProvider>
+  );
 }
 
 export default App;
-
