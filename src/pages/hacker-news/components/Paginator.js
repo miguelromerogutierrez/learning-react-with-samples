@@ -41,7 +41,7 @@ export default class Paginator extends React.Component {
   }
   
   goPage = index => {
-    const posInit = this.state.currentPage + 1;
+    const posInit = index * this.props.itemsPerPage
     const posEnd = Math.min(posInit + this.props.itemsPerPage, this.props.data.length);
     const itemsPage = this.props.data.slice(posInit, posEnd);
     this.setState({ currentPage: index, itemsPage });

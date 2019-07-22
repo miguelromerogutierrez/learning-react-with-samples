@@ -13,7 +13,7 @@ export default function FormField(props) {
       <input
         id={props.id}
         className="form-field__input"
-        type="text"
+        type={props.type}
         name={props.name}
         value={props.value}
         onChange={props.onChange}
