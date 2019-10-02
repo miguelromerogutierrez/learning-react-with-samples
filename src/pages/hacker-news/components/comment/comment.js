@@ -1,31 +1,32 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
+import React from 'react'
 import Paginator from '../Paginator';
 import CommentsData from '../CommentsData';
 
 import './comment.scss';
 
-export default function Comment(props) {
+export default function Comments(props) {
 
   return (
-    <div className="story-comments">
-      <Paginator data={props.comments} itemsPerPage={7}>
-        {
-          ({ itemsPage, nextPage }) => {
-            return <CommentsData commentsId={itemsPage}>
-              {({pending, comments}) => {
-                return comments.map(comment =>(
-                  <div className="comment">
-                    <i class="fas fa-chevron-circle-right"></i>
-                    <div dangerouslySetInnerHTML={{__html: comment.text}} />
-                    <div className="comment-footer">by {comment.by}</div>
-                  </div>
-                ))
-              }}
-            </CommentsData>
-          }
+    <Paginator data={props.comments} itemsPerPage={7}>
+      {
+        ({ itemsPage, nextPage }) => {
+          return <CommentsData commentsId={itemsPage}>
+            {({pending, comments}) => {
+              return comments.map(comment => <Comment text={comment.text} by={comment.by} />)
+            }}
+          </CommentsData>
         }
-      </Paginator>
-    </div>
+      }
+    </Paginator>
   )
+}
+
+function Comment(props) {
+  return (
+    <div className="comment">
+      <i class="fas fa-chevron-circle-right"></i>
+      <div dangerouslySetInnerHTML={{__html: props.text}} />
+      <div className="comment-footer">by {props.by}</div>
+    </div>
+  );
 }

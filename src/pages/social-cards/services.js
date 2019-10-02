@@ -28,7 +28,13 @@ const cardsData = [
         hasRetweeted: true,
         hasLiked: false,
       }
-    }
+    },
+    comments:[
+      {
+        username: "",
+        content:""
+      }
+    ]
   },
   {
     id:2,

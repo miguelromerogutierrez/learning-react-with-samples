@@ -17,31 +17,47 @@ class Story extends React.PureComponent {
 
   render() {
     return (
-      <div className="story--card">
-        <a href={this.props.url} className="story--title" >
+      <StoryCard>
+        <StoryCard.Title url={this.props.url}>
           {this.props.title}
-        </a>
-        <div className="story-footer">
+        </StoryCard.Title>
+        <StoryCard.Footer>
           <span className="story-footer__autor" >By {this.props.by}</span>&nbsp;•&nbsp;
           {this.props.kids && (
             <span className="story-footer__comments" onClick={this.handleClickComments} >{this.props.kids.length} comments&nbsp;•&nbsp;</span>
           )}
           <span className="story-footer__date">{format(new Date(this.props.time*1000), 'MM/DD/YYYY')}</span>
-        </div>
-        {
-          this.state.displayComments
-          ? <Comments comments={this.props.kids || []}/>
-          : null
-        }
-        <div className="story--score">{this.props.score}</div>
-      </div>
+        </StoryCard.Footer>
+        <StoryCard.Comments>
+          {
+            this.state.displayComments
+            ? <Comments comments={this.props.kids || []}/>
+            : null
+          }
+        </StoryCard.Comments>
+        <StoryCard.Score>{this.props.score}</StoryCard.Score>
+      </StoryCard>
     );
   }
 }
 
-Story.propTypes = {
-
+function StoryCard({children}) {
+  return (
+    <div className="story--card">
+      {children}
+    </div>
+  )
 }
+
+const StoryTitle = ({url, children}) => <a href={url} className="story--title" > {children}</a>;
+const StoryFooter = ({children}) => <div className="story-footer">{children}</div>;
+const StoryComments = ({children}) => <div className="story-comments">{children}</div>;
+const StoryScore = ({children}) => <div className="story--score">{children}</div>;
+
+StoryCard.Title = StoryTitle;
+StoryCard.Footer = StoryFooter;
+StoryCard.Comments = StoryComments;
+StoryCard.Score = StoryScore;
 
 export default Story
 
