@@ -1,15 +1,11 @@
 import React from 'react';
+import Field from './field';
+import ErrorLabel from './error-label';
 import './form-field.scss';
 
 export default function FormField(props) {
   return (
-    <div className="form-field">
-      <label
-        className="form-field__label"
-        htmlFor={props.id}
-      >
-        {props.labelText}
-      </label>
+    <Field label={props.labelText}>
       <input
         id={props.id}
         className="form-field__input"
@@ -19,11 +15,7 @@ export default function FormField(props) {
         onChange={props.onChange}
         placeholder={props.placeholder}
       />
-      {
-        !!props.error
-        ? <p className="form-field__error">{props.error}</p>
-        : null
-      }
-    </div>
+      <ErrorLabel error={props.error} show={!!props.error} />
+    </Field>
   )
 }
