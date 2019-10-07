@@ -33,7 +33,6 @@ const Auth = {
   user: null,
   suscriptors: [],
   suscribe: (cb) => {
-    debugger;
     Auth.suscriptors.push(cb);
   }
 }
@@ -50,7 +49,6 @@ export default function withAuthProvider(Component) {
 
     componentDidMount() {
       Auth.suscribe((type) => {
-        debugger;
         switch(type) {
           case 'login':
             this.setState({ user: Auth.user });

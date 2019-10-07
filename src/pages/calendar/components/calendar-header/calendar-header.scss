@@ -1,0 +1,26 @@
+.calendar--header {
+  &-date {
+    font-size: 22px;
+    color: #fff;
+
+    img {
+      width: 25px;
+      height: 25px;
+      position: absolute;
+      top: 0;
+      right: 0;
+    }
+
+    .day {
+      display: inline-block;
+      width: 63px;
+      position: relative;
+    }
+
+    .sufix {
+      font-size: 0.6em;
+      position: absolute;
+      top: 0;
+    }
+  }
+}

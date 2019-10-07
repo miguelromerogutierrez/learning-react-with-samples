@@ -1,0 +1,25 @@
+.day-of-week {
+  padding: 5px;
+
+  .day {
+    text-align: right;
+  }
+}
+
+.days-of-month {
+  border-bottom: 1px solid;
+
+  .day-of-week {
+    min-height: 60px;
+    border-top: 1px solid;
+    border-left: 1px solid;
+
+    &:nth-child(7n+0) {
+      border-right: 1px solid;
+    }
+
+    .events {
+      height: 40px;
+    }
+  }
+}
