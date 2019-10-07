@@ -9,15 +9,13 @@ export function EventState(props) {
   const setSafeStateEvent = (node, value, cb) => {
     const nodeEvents = events[node] || [];
     const safeState = {
-      events: {
-        ...events,
-        [node]: [
-          ...nodeEvents,
-          {...value}
-        ]
-      }
+      ...events,
+      [node]: [
+        ...nodeEvents,
+        {...value}
+      ]
     };
-    debugger;
+
     setEvents(safeState);
   }
 
@@ -33,14 +31,13 @@ export function EventState(props) {
     return events[`${year}/${month}/${day}`] || [];
   }
 
-  const getContextValue = () => {
-    return {
-      createEvent: createEvent,
-      getEvents: getEvents
-    };
+  const value = {
+    createEvent: createEvent,
+    getEvents: getEvents,
+    events
   };
 
-  return <EventContext.Provider {...props} value={getContextValue()} />;
+  return <EventContext.Provider {...props} value={value} />;
 }
 
 export function useEventState() {

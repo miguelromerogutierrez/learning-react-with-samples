@@ -48,27 +48,6 @@ class CalendarApp extends Component {
     });
   };
 
-  handleCreateEvent = () => {
-    const { calendar, events } = this.props;
-    const { eventForm } = this.state;
-    events.createEvent({
-      year: calendar.year,
-      month: calendar.month,
-      day: this.day,
-      title: eventForm.title,
-      description: eventForm.description
-    }, () => {
-      this.day = '';
-      this.setState({
-        showEventCreator: false,
-        eventForm: {
-          title: '',
-          description: ''
-        }
-      });
-    });
-  }
-
   handleChangeFormField = (event) => {
     const name = event.target.name;
     const value = event.target.value;
@@ -91,6 +70,26 @@ class CalendarApp extends Component {
                 {(calendar) =>  {
                   const isLongMonth = calendar.firstDayMonth === 6 || (calendar.firstDayMonth === 5 && calendar.daysOfMonth === 31);
                   const daysRows = isLongMonth ? '6' : '5';
+
+                  const handleCreateEvent = () => {
+                    const { eventForm } = this.state;
+                    events.createEvent({
+                      year: calendar.year,
+                      month: calendar.month,
+                      day: this.day,
+                      title: eventForm.title,
+                      description: eventForm.description
+                    }, () => {
+                      this.day = '';
+                      this.setState({
+                        showEventCreator: false,
+                        eventForm: {
+                          title: '',
+                          description: ''
+                        }
+                      });
+                    });
+                  }
                   return (
                     <div>
                       <CalendarHeader
@@ -140,7 +139,7 @@ class CalendarApp extends Component {
                             value={eventForm.description}
                             onChange={this.handleChangeFormField}
                           />
-                          <button onClick={this.handleCreateEvent}>Create</button>
+                          <button onClick={handleCreateEvent}>Create</button>
                           <button onClick={this.handleCandelEvent}>Cancel</button>
                         </Frame.Dialog>
                       </Frame>

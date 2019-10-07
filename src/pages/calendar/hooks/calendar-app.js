@@ -20,7 +20,7 @@ function CalendarApp() {
   const [weather, setWeather] = React.useState({
     icon: ''
   });
-  let selectedDay = 0;
+  const selectedDay = React.useRef(0);
 
   const events = useEventState();
   const calendar = useCalendarState();
@@ -38,7 +38,7 @@ function CalendarApp() {
   };
 
   const handelShowEventCreator = (event, day) => {
-    selectedDay = day;
+    selectedDay.current = day;
     setshowEventCreator(true);
   };
 
@@ -46,11 +46,11 @@ function CalendarApp() {
     events.createEvent({
       year: calendar.year,
       month: calendar.month,
-      day: selectedDay,
+      day: selectedDay.current,
       title: eventForm.title,
       description: eventForm.description
     });
-    selectedDay = 0;
+    selectedDay.current = 0;
     setshowEventCreator(false);
     setEventForm({
       title: '',

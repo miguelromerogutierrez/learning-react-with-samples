@@ -3,7 +3,7 @@ import classnames from 'classnames';
 import './day-of-week.scss';
 
 export default function DayOfWeek({
-  day, className, active, events = [], onCreateEvent
+  day, className = '', active, events = [], onCreateEvent
 }) {
   const containerCN = classnames('day-of-week', { active: active }, className);
   return (
