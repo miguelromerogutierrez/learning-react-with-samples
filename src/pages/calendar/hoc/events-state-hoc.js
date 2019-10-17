@@ -11,51 +11,57 @@ const splitDate = (date) => {
   return { year, month, day };
 }
 
-export default function withEventState(Component) {
-  return class EventState extends React.Component {
-    state = {
-      events: {}
+export class EventStateProvider extends React.Component {
+  state = {
+    events: {}
+  };
+
+  setSafeStateEvent = (node, value, cb) => {
+    const nodeEvents = this.state.events[node] || [];
+    const safeState = {
+      events: {
+        ...this.state.events,
+        [node]: [
+          ...nodeEvents,
+          {...value}
+        ]
+      }
     };
-
-    setSafeStateEvent = (node, value, cb) => {
-      const nodeEvents = this.state.events[node] || [];
-      const safeState = {
-        events: {
-          ...this.state.events,
-          [node]: [
-            ...nodeEvents,
-            {...value}
-          ]
-        }
-      };
-      this.setState(safeState, cb);
-    }
-
-    createEvent = ({ year, month, day, title, description, metadata = {} }, cb) => {
-      this.setSafeStateEvent(
-        `${year}/${month}/${day}`, {title, description, metadata}, cb
-      );
-    };
-
-    getEvents = (year, month, day) => {
-      return this.state.events[`${year}/${month}/${day}`] || [];
-    }
-
-    getContextValue = () => {
-      return {
-        createEvent: this.createEvent,
-        getEvents: this.getEvents
-      };
-    };
-  
-    render() {
-      return (
-        <EventContext.Provider value={this.getContextValue()}>
-          <EventContext.Consumer>
-            {value => <Component {...this.props} events={value} />}
-          </EventContext.Consumer>
-        </EventContext.Provider>
-      );
-    }
+    this.setState(safeState, cb);
   }
+
+  createEvent = ({ year, month, day, title, description, metadata = {} }, cb) => {
+    this.setSafeStateEvent(
+      `${year}/${month}/${day}`, {title, description, metadata}, cb
+    );
+  };
+
+  getEvents = (year, month, day) => {
+    return this.state.events[`${year}/${month}/${day}`] || [];
+  }
+
+  getContextValue = () => {
+    return {
+      createEvent: this.createEvent,
+      getEvents: this.getEvents
+    };
+  };
+
+  render() {
+    return (
+      <EventContext.Provider value={this.getContextValue()}>
+        {this.props.children}        
+      </EventContext.Provider>
+    );
+  }
+}
+
+export default function withEventState(Component) {
+  return function(props) {
+    return (
+      <EventContext.Consumer>
+        {value => <Component {...props} events={value} />}
+      </EventContext.Consumer>
+    )
+  } 
 }

@@ -14,7 +14,7 @@ export default function useCalendar({
   to = { year: 2080, month: 0 },
   from = { year: 1990, month: 0 }
 } = {}) {
-  const {year, month} = getCurrentDate();
+  const {year, month} = React.useMemo(() => getCurrentDate(), []);
   const [calendar, setCalendar] = React.useState({
     year,
     month,

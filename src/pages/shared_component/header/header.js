@@ -16,6 +16,7 @@ export default function header() {
         <li><Link to="/hooks">Hooks</Link></li>
         <li><Link to="/calendar-hoc">Calendar Hoc</Link></li>
         <li><Link to="/calendar-rp">Calendar RP</Link></li>
+        <li><Link to="/calendar-redux">Calendar Redux</Link></li>
         <li><Link to="/calendar-hooks">Calendar Hooks</Link></li>
       </ul>
     </div>

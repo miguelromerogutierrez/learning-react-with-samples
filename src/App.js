@@ -6,8 +6,9 @@ import RegisterFormPage from './pages/register-page/register-page';
 import HackerNewsPage from './pages/hacker-news/hacker-news-page';
 import AuthPage from './pages/auth-user/page';
 import Hooks from './hooks/App';
-import Calendar from './pages/calendar/hoc/calendar-app';
-import CalendarRP from './pages/calendar/render-props/calendar-app';
+import Calendar from './pages/calendar/hoc';
+import CalendarRP from './pages/calendar/render-props';
+import CalendarRedux from './pages/calendar/redux';
 import CalendarHook from './pages/calendar/hooks';
 import Header from './pages/shared_component/header/header';
 
@@ -24,6 +25,7 @@ function App() {
       <Route path="/hooks" exact component={Hooks} />
       <Route path="/calendar-hoc" exact component={Calendar} />
       <Route path="/calendar-rp" exact component={CalendarRP} />
+      <Route path="/calendar-redux" exact component={CalendarRedux} />
       <Route path="/calendar-hooks" exact component={CalendarHook} />
     </Router>
   );

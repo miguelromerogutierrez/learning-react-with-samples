@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 const EventContext = React.createContext({});
 
-export default class EventState extends React.Component {
+export class EventStateProvider extends React.Component {
   state = {
     events: {}
   };
@@ -42,10 +42,16 @@ export default class EventState extends React.Component {
   render() {
     return (
       <EventContext.Provider value={this.getContextValue()}>
-        <EventContext.Consumer>
-          {this.props.children}
-        </EventContext.Consumer>
+        {this.props.children}
       </EventContext.Provider>
     );
   }
+}
+
+export default function EventState({children}) {
+  return (
+    <EventContext.Consumer>
+      {children}
+    </EventContext.Consumer>
+  )
 }
